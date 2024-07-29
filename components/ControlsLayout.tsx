@@ -35,8 +35,14 @@ export const ControlsLayout: React.FC<ControlsLayoutProps> = ({
                     Controls
                 </div>
                 <div className="flex flex-col gap-8">
-                    <SpeedComponents selectIndex={selectIndex} setSelectIndex={setSelectIndex} />
-                    <DifficultySlider difficultyValue={difficultyValue} setDifficultyValue={setDifficultyValue} />
+                    <SpeedComponents
+                        setCanPlay={setCanPlay}
+                        selectIndex={selectIndex}
+                        setSelectIndex={setSelectIndex} />
+                    <DifficultySlider
+                        setCanPlay={setCanPlay}
+                        difficultyValue={difficultyValue}
+                        setDifficultyValue={setDifficultyValue} />
                     <div className="flex w-full justify-center items-stretch flex-1 gap-4">
 
                         <Button
@@ -44,7 +50,6 @@ export const ControlsLayout: React.FC<ControlsLayoutProps> = ({
                             size={"lg"}
                             variant={canPlay ? "default" : "subtle"}
                             onClick={() => {
-                                reset()
                                 setCanPlay(true);
                             }}>Play</Button>
                         <Button
