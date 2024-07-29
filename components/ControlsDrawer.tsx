@@ -14,6 +14,7 @@ interface ControlsDrawerProps {
     setCanPlay: React.Dispatch<React.SetStateAction<boolean>>
     isOpen: boolean
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setPlayerWon: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const ControlsDrawer: React.FC<ControlsDrawerProps> = ({
@@ -25,7 +26,8 @@ export const ControlsDrawer: React.FC<ControlsDrawerProps> = ({
     setDifficultyValue,
     setCanPlay,
     isOpen,
-    setIsOpen
+    setIsOpen,
+    setPlayerWon
 }) => {
     return (
         <Drawer
@@ -38,8 +40,18 @@ export const ControlsDrawer: React.FC<ControlsDrawerProps> = ({
                     <DrawerTitle>Controls</DrawerTitle>
                     <DrawerDescription>Set Your Controls </DrawerDescription>
                 </DrawerHeader>
-                <SpeedComponents selectIndex={selectIndex} setSelectIndex={setSelectIndex} setCanPlay={setCanPlay} />
-                <DifficultySlider difficultyValue={difficultyValue} setDifficultyValue={setDifficultyValue} setCanPlay={setCanPlay} />
+                <SpeedComponents
+                    selectIndex={selectIndex}
+                    setSelectIndex={setSelectIndex}
+                    setCanPlay={setCanPlay}
+                    setPlayerWon={setPlayerWon}
+                />
+                <DifficultySlider
+                    difficultyValue={difficultyValue}
+                    setDifficultyValue={setDifficultyValue}
+                    setCanPlay={setCanPlay}
+                    setPlayerWon={setPlayerWon}
+                />
                 <div className="flex gap-4">
                     <Button
                         className='flex flex-1'

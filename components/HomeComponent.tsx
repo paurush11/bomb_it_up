@@ -92,7 +92,9 @@ export const HomeComponent: React.FC<HomeComponentProps> = ({ }) => {
                     setDifficultyValue={setDifficultyValue}
                     reset={reset}
                     canPlay={canPlay}
-                    setCanPlay={setCanPlay} />
+                    setCanPlay={setCanPlay}
+                    setPlayerWon={setPlayerWon}
+                />
             </div>
         </div>
     );

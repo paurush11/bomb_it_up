@@ -12,6 +12,7 @@ interface LowerSectionProps {
     setCanPlay: React.Dispatch<React.SetStateAction<boolean>>
     isOpen: boolean
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setPlayerWon: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const LowerSection: React.FC<LowerSectionProps> = ({
@@ -23,7 +24,8 @@ export const LowerSection: React.FC<LowerSectionProps> = ({
     setDifficultyValue,
     setCanPlay,
     isOpen,
-    setIsOpen
+    setIsOpen,
+    setPlayerWon
 }) => {
     return (
         <div className="flex gap-4 w-full justify-center bottom-0 p-4 border-border border-t-2 rounded-t-lg bg-foreground ">
@@ -37,7 +39,10 @@ export const LowerSection: React.FC<LowerSectionProps> = ({
                 setDifficultyValue={setDifficultyValue}
                 reset={reset}
                 canPlay={canPlay}
-                setCanPlay={setCanPlay} />
+                setCanPlay={setCanPlay}
+                setPlayerWon={setPlayerWon}
+
+            />
         </div>
     );
 }
