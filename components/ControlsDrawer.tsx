@@ -37,8 +37,8 @@ export const ControlsDrawer: React.FC<ControlsDrawerProps> = ({
                     <DrawerTitle>Controls</DrawerTitle>
                     <DrawerDescription>Set Your Controls </DrawerDescription>
                 </DrawerHeader>
-                <SpeedComponents selectIndex={selectIndex} setSelectIndex={setSelectIndex} />
-                <DifficultySlider difficultyValue={difficultyValue} setDifficultyValue={setDifficultyValue} />
+                <SpeedComponents selectIndex={selectIndex} setSelectIndex={setSelectIndex} setCanPlay={setCanPlay} />
+                <DifficultySlider difficultyValue={difficultyValue} setDifficultyValue={setDifficultyValue} setCanPlay={setCanPlay} />
                 <div className="flex gap-4">
                     <Button
                         className='flex flex-1'
