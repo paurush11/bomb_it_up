@@ -1,7 +1,7 @@
 "use client";
 
 import { cn, createBombArray } from "@/lib/utils";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { GameOverDialog } from "./GameOver";
 
 interface BombProps {
@@ -10,6 +10,7 @@ interface BombProps {
     iconPressedIndex: number[]
     isGameOver: boolean
     canPlay: boolean
+    playerWon: boolean
     reset: () => void
     setIconPressedIndex: React.Dispatch<React.SetStateAction<number[]>>
     setIsGameOver: React.Dispatch<React.SetStateAction<boolean>>
@@ -17,10 +18,26 @@ interface BombProps {
     setCanPlay: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Bombs: React.FC<BombProps> = ({ totalUnits, difficultyValue, iconPressedIndex, setIconPressedIndex, setIsGameOver, isGameOver, reset, canPlay, setScore, setCanPlay }) => {
+const Bombs: React.FC<BombProps> = ({
+    totalUnits,
+    difficultyValue,
+    iconPressedIndex,
+    setIconPressedIndex,
+    setIsGameOver,
+    isGameOver,
+    reset,
+    canPlay,
+    setScore,
+    setCanPlay,
+    playerWon
+}) => {
 
+    useEffect(() => {
+        setBombs(createBombArray(totalUnits, noOfBombs))
+    }, [totalUnits, difficultyValue, canPlay])
+
+    const [bombs, setBombs] = useState<boolean[]>([]);
     const noOfBombs = Math.floor(totalUnits * (difficultyValue / 100));
-    const bombs = useMemo(() => createBombArray(totalUnits, noOfBombs), [totalUnits, difficultyValue]);
     const diamondSvg = (<svg width={"50%"} height={"50%"} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <linearGradient id="diamondGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -74,23 +91,24 @@ const Bombs: React.FC<BombProps> = ({ totalUnits, difficultyValue, iconPressedIn
     const wrongBox = 'animate-shake animate-twice animate-duration-200 animate-ease-in-out animate-normal animate-fill-backwards'
     const correctBox = 'animate-pulse animate-twice animate-duration-200 animate-ease-in-out animate-normal animate-fill-backwards'
     const hoverAnimation = 'hover:animate-bounce hover:animate-once hover:animate-duration-1000 hover:animate-ease-in-out animate-normal hover:animate-fill-backwards'
-
+    const [open, setOpen] = useState(false)
     return (
         <div className="flex  flex-1 flex-col  lg:min-w-[70%] min-w-[90%] text-white border-r-2 p-2 items-center justify-center ">
             <div className="grid grid-cols-6 gap-4 p-4 w-full flex-1 ">
                 {[...Array(totalUnits)].map((_, i) => (
-
                     <div
                         key={i}
                         className={cn("flex  min-h-20 max-h-80 rounded-md  bg-primary justify-center items-center shadow-2xl hover:shadow-md ", `${hoverAnimation}`, iconPressedIndex.includes(i) && (bombs[i] === true ? correctBox : wrongBox))}
                         style={{
-                            backgroundColor: iconPressedIndex.includes(i) ? (bombs[i] === true ? "red" : "green") : "hsl(var(--primary))"
+                            backgroundColor: (playerWon || iconPressedIndex.includes(i)) ? (bombs[i] === true ? "red" : "green") : "hsl(var(--primary))",
+                            opacity: (playerWon) ? 0.2 : 1
                         }}
                         onClick={() => {
                             if (canPlay) {
                                 setIconPressedIndex([...iconPressedIndex, i]);
                                 if (bombs[i] === true) {
                                     setIsGameOver(true);
+                                    setOpen(true);
                                 } else {
                                     setScore((prev) => prev + 1)
                                 }
@@ -99,11 +117,13 @@ const Bombs: React.FC<BombProps> = ({ totalUnits, difficultyValue, iconPressedIn
 
                     >
 
-                        {iconPressedIndex.includes(i) && (bombs[i] === true ? bombSvg : diamondSvg)}
+                        {(playerWon || iconPressedIndex.includes(i)) && (bombs[i] === true ? bombSvg : diamondSvg)}
                     </div>
 
                 ))}
                 {isGameOver && <GameOverDialog
+                    setOpen={setOpen}
+                    open={open}
                     setCanPlay={setCanPlay}
                     onRestart={() => {
                         reset()

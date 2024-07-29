@@ -28,7 +28,8 @@ export const ControlsDrawer: React.FC<ControlsDrawerProps> = ({
     setIsOpen
 }) => {
     return (
-        <Drawer open={isOpen}
+        <Drawer
+            open={isOpen}
             onClose={() => {
                 setIsOpen(false)
             }}>
@@ -47,7 +48,6 @@ export const ControlsDrawer: React.FC<ControlsDrawerProps> = ({
                         onClick={() => {
                             setCanPlay(true);
                             setIsOpen(false)
-
                         }}>Play</Button>
                     <Button
                         className='flex flex-1'

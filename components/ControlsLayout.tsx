@@ -12,6 +12,7 @@ interface ControlsLayoutProps {
     setSelectIndex: React.Dispatch<React.SetStateAction<number>>
     setDifficultyValue: React.Dispatch<React.SetStateAction<number>>
     setCanPlay: React.Dispatch<React.SetStateAction<boolean>>
+    setPlayerWon: React.Dispatch<React.SetStateAction<boolean>>
     playerWon: boolean
 }
 
@@ -23,6 +24,7 @@ export const ControlsLayout: React.FC<ControlsLayoutProps> = ({
     setSelectIndex,
     setDifficultyValue,
     setCanPlay,
+    setPlayerWon,
     score,
     playerWon
 }) => {
@@ -36,10 +38,12 @@ export const ControlsLayout: React.FC<ControlsLayoutProps> = ({
                 </div>
                 <div className="flex flex-col gap-8">
                     <SpeedComponents
+                        setPlayerWon={setPlayerWon}
                         setCanPlay={setCanPlay}
                         selectIndex={selectIndex}
                         setSelectIndex={setSelectIndex} />
                     <DifficultySlider
+                        setPlayerWon={setPlayerWon}
                         setCanPlay={setCanPlay}
                         difficultyValue={difficultyValue}
                         setDifficultyValue={setDifficultyValue} />

@@ -6,10 +6,11 @@ interface SpeedComponentProps {
     selectIndex: number
     setSelectIndex: Dispatch<SetStateAction<number>>
     setCanPlay: React.Dispatch<React.SetStateAction<boolean>>
+    setPlayerWon: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const SpeedComponents: React.FC<SpeedComponentProps> = ({
-    selectIndex, setSelectIndex, setCanPlay
+    selectIndex, setSelectIndex, setCanPlay, setPlayerWon
 }) => {
     return <div className="flex  border-2 rounded-md flex-col ">
         <div className="flex bg-primary  rounded-t-md p-4  text-lg">Boxes</div>
@@ -19,8 +20,8 @@ const SpeedComponents: React.FC<SpeedComponentProps> = ({
                     key={i}
                     onClick={() => {
                         setSelectIndex(6 * (i + 1))
-                        console.log(selectIndex)
                         setCanPlay(false)
+                        setPlayerWon(false)
                     }}
                     variant={selectIndex === 6 * (i + 1) ? "default" : "secondary"}
                 >

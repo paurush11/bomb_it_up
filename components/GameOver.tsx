@@ -7,23 +7,23 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
-import { useState, useEffect } from "react"
+import { Dispatch, SetStateAction } from "react"
 
-export function GameOverDialog({ onRestart, setCanPlay }: {
+export function GameOverDialog({ onRestart, setCanPlay, open, setOpen }: {
     onRestart: () => void
     setCanPlay: React.Dispatch<React.SetStateAction<boolean>>
+    open: boolean
+    setOpen: Dispatch<SetStateAction<boolean>>
 }) {
-    const [open, setOpen] = useState(false)
-    useEffect(() => {
-        setOpen(true)
-    }, [])
+    const handleClose = () => {
+        setCanPlay(false)
+        setOpen(false)
+    }
+
 
     return (
         <Dialog open={open} onOpenChange={setOpen}  >
-            <DialogContent className="sm:max-w-md bg-primary-foreground" onClose={() => {
-                setCanPlay(false)
-                setOpen(false)
-            }} >
+            <DialogContent className="sm:max-w-md bg-primary-foreground" onClose={handleClose} >
                 <DialogHeader>
                     <DialogTitle>Game Over!</DialogTitle>
                     <DialogDescription>

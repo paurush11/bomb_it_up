@@ -20,7 +20,7 @@ export const HomeComponent: React.FC<HomeComponentProps> = ({ }) => {
     const [score, setScore] = useState(0);
     const [playerWon, setPlayerWon] = useState(false);
     const reset = () => {
-        setSelectIndex(6);
+        // setSelectIndex(6);
         setDifficultyValue(33);
         setIconPressedIndex([]);
         setIsGameOver(false);
@@ -42,11 +42,12 @@ export const HomeComponent: React.FC<HomeComponentProps> = ({ }) => {
     return (
         <div className="bg-foreground min-h-screen">
             <div className="lg:flex bg-foreground min-h-screen hidden">
-                {playerWon && <div className='flex flex-1 flex-col min-h-screen items-center justify-center border-border border-r-2'>
+                {playerWon && <div className='flex flex-1 flex-col min-h-screen items-center justify-center border-border border-r-2 z-20 min-w-[70%] absolute'>
                     <h1 className='text-xl text-center text-primary'>You Won!</h1>
                     <Button className='mt-4' onClick={() => reset()}>Play Again</Button>
                 </div>}
-                {!playerWon && <Bombs
+                {<Bombs
+                    playerWon={playerWon}
                     setCanPlay={setCanPlay}
                     totalUnits={selectIndex}
                     difficultyValue={difficultyValue}
@@ -58,6 +59,7 @@ export const HomeComponent: React.FC<HomeComponentProps> = ({ }) => {
                     canPlay={canPlay}
                     setScore={setScore} />}
                 <ControlsLayout
+                    setPlayerWon={setPlayerWon}
                     score={score}
                     selectIndex={selectIndex}
                     difficultyValue={difficultyValue}
@@ -70,6 +72,7 @@ export const HomeComponent: React.FC<HomeComponentProps> = ({ }) => {
             </div>
             <div className='lg:hidden flex bg-foreground min-h-screen flex-col gap-4'>
                 <Bombs
+                    playerWon={playerWon}
                     setCanPlay={setCanPlay}
                     totalUnits={selectIndex}
                     difficultyValue={difficultyValue}
