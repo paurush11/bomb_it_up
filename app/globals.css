@@ -2,32 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background: 234 100% 95%;
+  --foreground: 234 5% 10%;
+  --card: 234 50% 90%;
+  --card-foreground: 234 5% 15%;
+  --popover: 234 100% 95%;
+  --popover-foreground: 234 100% 10%;
+  --primary: 234 32% 40%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 234 30% 70%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 196 30% 85%;
+  --muted-foreground: 234 5% 40%;
+  --accent: 196 30% 80%;
+  --accent-foreground: 234 5% 15%;
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 234 5% 90%;
+  --border: 234 30% 68%;
+  --input: 234 30% 50%;
+  --ring: 234 32% 40%;
+  --radius: 1rem;
+  --success: 142 76% 36%;
+  --success-foreground: 355 100% 97%;
+  --warning: 38 92% 50%;
+  --warning-foreground: 48 96% 89%;
+  --info: 207 90% 54%;
+  --info-foreground: 202 100% 95%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.dark {
+  --background: 234 50% 10%;
+  --foreground: 234 5% 90%;
+  --card: 234 50% 10%;
+  --card-foreground: 234 5% 90%;
+  --popover: 234 50% 5%;
+  --popover-foreground: 234 5% 90%;
+  --primary: 234 32% 40%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 234 30% 20%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 196 30% 25%;
+  --muted-foreground: 234 5% 65%;
+  --accent: 196 30% 25%;
+  --accent-foreground: 234 5% 90%;
+  --destructive: 0 100% 50%;
+  --destructive-foreground: 234 5% 90%;
+  --border: 234 30% 50%;
+  --input: 234 30% 50%;
+  --ring: 234 32% 40%;
+  --radius: 1rem;
+  --success: 142 76% 36%;
+  --success-foreground: 355 100% 97%;
+  --warning: 48 96% 89%;
+  --warning-foreground: 38 92% 50%;
+  --info: 202 100% 95%;
+  --info-foreground: 207 90% 54%;
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  body {
+    @apply bg-background text-foreground;
   }
 }
